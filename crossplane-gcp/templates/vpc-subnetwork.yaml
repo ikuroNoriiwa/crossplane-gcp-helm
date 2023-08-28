@@ -1,0 +1,15 @@
+apiVersion: compute.gcp.upbound.io/v1beta1
+kind: Subnetwork
+metadata: 
+    annotations: 
+        meta.upbound.io/example-id: compute/v1beta1/networkendpointgroup
+    labels: 
+        {{- include "crossplane-gcp.labels" . | nindent 8 }}
+    name:  "subnetwork-{{ include "crossplane-gcp.fullname" . }}-{{ .Values.appEnvironment }}"
+
+spec: 
+    forProvider: 
+        ipCidrRange: {{ .Values.gcpNetwork.range }}
+        region: {{ .Values.gcpNetwork.region }}
+        network: "vpc-{{ include "crossplane-gcp.fullname" . }}-{{ .Values.appEnvironment }}"
+        

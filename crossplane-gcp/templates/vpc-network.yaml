@@ -1,0 +1,13 @@
+apiVersion: compute.gcp.upbound.io/v1beta1
+kind: Network 
+metadata:
+    name: "vpc-{{ include "crossplane-gcp.fullname" . }}-{{ .Values.appEnvironment }}"
+    labels: 
+        service: "vpc" 
+        {{- include "crossplane-gcp.labels" . | nindent 8 }}
+        
+spec: 
+    forProvider:
+        autoCreateSubnetworks: false
+        description: 'This network is created by crossplane'
+        routingMode: REGIONAL
