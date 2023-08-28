@@ -11,5 +11,7 @@ spec:
         - image: {{ .Values.instances.defaultImage }}
     machineType: {{ .Values.instances.defaultType }}
     networkInterface: 
-      - network: {{ .Values.instances.networkInterface }}
+      - subnetworkRef:
+          name: "subnetwork-{{ include "crossplane-gcp.fullname" . }}-{{ .Values.appEnvironment }}"
+
     zone: {{ .Values.instances.defaultZone }}

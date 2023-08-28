@@ -68,3 +68,8 @@ instances:
   defaultType:   e2-micro
   networkInterface: default 
   defaultZone: europe-west9-b
+
+gcpNetwork:
+  range: 10.3.0.0/16
+  region: europe-west9 
+  

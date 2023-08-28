@@ -67,3 +67,8 @@ instances:
   defaultType:   e2-small
   networkInterface: default 
   defaultZone: europe-west9-a
+
+gcpNetwork:
+  range: 10.2.0.0/16
+  region: europe-west9 
+  
