@@ -1,0 +1,14 @@
+apiVersion: storage.gcp.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  name: "bckt-{{ .Values.appEnvironment }}"
+  labels:
+    docs.crossplane.io/example: provider-gcp
+    {{- include "crossplane-gcp.labels" . | nindent 4 }}
+
+spec:
+  forProvider:
+    location: "{{ .Values.bucket.location }}"
+    uniformBucketLevelAccess: true
+  providerConfigRef:
+    name: default

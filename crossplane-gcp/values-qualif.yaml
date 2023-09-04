@@ -73,3 +73,5 @@ gcpNetwork:
   range: 10.3.0.0/16
   region: europe-west9 
   
+bucket: 
+  location: EU 
