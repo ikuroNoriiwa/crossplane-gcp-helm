@@ -1,0 +1,17 @@
+apiVersion: compute.gcp.upbound.io/v1beta1
+kind: Instance 
+metadata: 
+  name: "{{ include "crossplane-gcp.fullname" . }}-{{ .Values.appEnvironment }}-2"
+  labels:
+    {{- include "crossplane-gcp.labels" . | nindent 4 }}
+spec: 
+  forProvider: 
+    bootDisk: 
+      - initializeParams: 
+        - image: {{ .Values.instances.defaultImage }}
+    machineType: {{ .Values.instances.defaultType }}
+    networkInterface: 
+      - subnetworkRef:
+          name: "subnetwork-{{ include "crossplane-gcp.fullname" . }}-{{ .Values.appEnvironment }}"
+
+    zone: {{ .Values.instances.defaultZone }}
