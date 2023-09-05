@@ -6,10 +6,11 @@
 ### Install required tools 
 
 This example required to have the following tools : 
-- (kubectl)[https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/]
-- (helm)[https://helm.sh/docs/intro/install/]
-- (argocd)[https://argo-cd.readthedocs.io/en/stable/cli_installation/]
-- (gcloud)[https://cloud.google.com/sdk/docs/install?hl=fr]
+- [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)
+- [helm](https://helm.sh/docs/intro/install/)
+- [argocd](https://argo-cd.readthedocs.io/en/stable/cli_installation/)
+- [gcloud](https://cloud.google.com/sdk/docs/install)
+
 Please check the official documentation to install them 
 
 ### Add helm repo 
@@ -22,7 +23,7 @@ helm update
 ### Install Crossplane components 
 
 ```bash
-helm install crossplane crosplane-stable/crossplane --namespace crossplane-system --create-namespace 
+helm install crossplane crossplane-stable/crossplane --namespace crossplane-system --create-namespace 
 ```
 
 ### Check crossplane installation 
@@ -70,7 +71,7 @@ done
 Create Service account Key file: 
 
 ```bash
-gcloud iam service-accounts keys create gcp-credential.json --iam-account=<SA_NAME>@<PROJECT_NAME>.iam.gserviceaccount.com
+gcloud iam service-accounts keys create gcp-credentials.json --iam-account=<SA_NAME>@<PROJECT_NAME>.iam.gserviceaccount.com
 ```
 
 We can now create the Kubernetes secret : 
