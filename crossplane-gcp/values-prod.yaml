@@ -74,3 +74,12 @@ gcpNetwork:
   
 bucket: 
   location: EU 
+
+  
+sqlInstance: 
+  version: POSTGRES_15
+  deletion: false
+  region: europe-west9 
+  settings: 
+    disksize: 20
+    tier: db-n1-standard-1

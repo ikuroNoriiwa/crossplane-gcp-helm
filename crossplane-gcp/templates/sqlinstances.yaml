@@ -1,0 +1,22 @@
+apiVersion: sql.gcp.upbound.io/v1beta1
+kind: DatabaseInstance
+metadata:
+  labels:
+    {{- include "crossplane-gcp.labels" . | nindent 4 }}
+  name: "sqlinstance-{{ .Values.appEnvironment }}"
+spec:
+  forProvider:
+    databaseVersion: "{{ .Values.sqlInstance.version }}"
+    deletionProtection: {{ .Values.sqlInstance.deletion }}
+    region: "{{ .Values.sqlInstance.region }}"
+    settings:
+      - diskSize: {{ .Values.sqlInstance.settings.disksize }}
+        tier: "{{ .Values.sqlInstance.settings.tier }}"
+        availabilityType: "ZONAL"
+        ipConfiguration: 
+            - ipv4Enabled: false
+              privateNetwork: projects/prj-swfc-sandbox-d/global/networks/vpc-crossplane-gcp-qualif
+        # name: "subnetwork-{{ include "crossplane-gcp.fullname" . }}-{{ .Values.appEnvironment }}"
+  writeConnectionSecretToRef:
+    name: sql-db-instance-secret
+    namespace: "{{ .Release.Namespace }}"

@@ -1,0 +1,27 @@
+apiVersion: compute.gcp.upbound.io/v1beta1
+kind: GlobalAddress
+metadata:
+  labels:
+    {{- include "crossplane-gcp.labels" . | nindent 4 }}
+  name: "vpc-peering-{{ .Values.appEnvironment }}"
+spec:
+  forProvider:
+    name: "vpc-peering-{{ .Values.appEnvironment }}"    
+    prefixLength: 16
+    addressType: INTERNAL 
+    purpose: "VPC_PEERING"
+    network: "vpc-{{ include "crossplane-gcp.fullname" . }}-{{ .Values.appEnvironment }}"
+
+---
+apiVersion: servicenetworking.gcp.upbound.io/v1beta1
+kind: Connection
+metadata:
+  name: "service-connection-{{ .Values.appEnvironment }}"
+  labels:
+    {{- include "crossplane-gcp.labels" . | nindent 4 }}
+spec:
+    forProvider: 
+        service: services/servicenetworking.googleapis.com
+        network: "vpc-{{ include "crossplane-gcp.fullname" . }}-{{ .Values.appEnvironment }}"
+        reservedPeeringRanges:
+            - "vpc-peering-{{ .Values.appEnvironment }}"
