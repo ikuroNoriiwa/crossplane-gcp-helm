@@ -6,6 +6,7 @@ metadata:
     {{- include "crossplane-gcp.labels" . | nindent 4 }}
 spec: 
   forProvider: 
+    allowStoppingForUpdate: true
     bootDisk: 
       - initializeParams: 
         - image: {{ .Values.instances.defaultImage }}
